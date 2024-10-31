@@ -35,6 +35,8 @@ def pl_predict(model_path: str,
     """
     assert os.path.isfile(model_path), 'model_path must be a valid file'
     assert os.path.isdir(img_dir), 'img_dir must be a valid directory'
+    if save_dir is not None:
+        os.makedirs(save_dir, exist_ok=True)
 
     model = ultralytics.YOLO(model_path)
 
@@ -56,6 +58,7 @@ def pl_predict(model_path: str,
         df_extended = pd.DataFrame(result_count, index=[file])
         df = pd.concat([df, df_extended], ignore_index=False)
 
+    df = df.fillna(0).astype(int)
     if save_csv:
         assert save_dir is not None and os.path.isdir(save_dir), 'save_dir must be a valid directory'
 
