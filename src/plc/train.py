@@ -1,7 +1,7 @@
 import ultralytics
 import os
 
-def pl_train(data_path, save_dir, model_path = "yolov8m.pt", mode = "detect", epochs = 100, device = "cpu"):
+def pl_train(data_path, save_dir, model_path = "yolov8m.pt", epochs = 100, device = "cpu"):
     '''
     Trains a YOLO model using the specified parameters.
 
@@ -9,7 +9,6 @@ def pl_train(data_path, save_dir, model_path = "yolov8m.pt", mode = "detect", ep
         data_path (str): Path to the data .YAML file.
         save_dir (str): Path to the directory to save the trained model.
         model_path (str, optional): Path to the YOLO model. Defaults to "yolov8m.pt".
-        mode (str, optional): Mode for training. Defaults to "detect".
         epochs (int, optional): Number of epochs for training. Defaults to 100.
         device (str, optional): Device to use for training. Defaults to "cpu".
     '''
@@ -19,12 +18,11 @@ def pl_train(data_path, save_dir, model_path = "yolov8m.pt", mode = "detect", ep
     data_path = os.path.abspath(data_path)
     os.makedirs(save_dir, exist_ok=True)
 
-    print("Training started.")
+    print("Training started.\n")
     model = ultralytics.YOLO(model_path)
     model.train(data=data_path,
-                mode=mode,
                 epochs=epochs,
                 device=device,
-                save_dir=save_dir)
-    model.export(format="onnx")
-    print("Training completed.")
+                project=save_dir)
+    # model.export(format="onnx")
+    print("\nTraining completed.")
