@@ -24,7 +24,9 @@ class TextRedirector:
 def train_main():
 
     def browse_data_path():
-        path = filedialog.askopenfilename()
+        path = filedialog.askopenfilename(
+            filetypes=[("Data File", "*.yaml *.YAML")]
+        )
         if path:
             print(f"Select Data YAML File to: {path}\n")
             data_path_var.set(path)
@@ -64,27 +66,32 @@ def train_main():
         epochs = int(epochs_var.get())
         device = device_var.get()
 
+        all_valid = True
+
         if not os.path.exists(data_path):
-            messagebox.showerror("Error", f"Please select a valid Data YAML Path. Your input: '{data_path}'")
-            return
+            print(f"Error: Please select a valid Data YAML Path. Your input: '{data_path}'\n")
+            all_valid = False
 
         if not save_dir:
-            messagebox.showerror("Error", f"Please select a valid Project Save Directory. Your input: '{save_dir}'")
-            return
+            print(f"Error: Please select a valid Project Save Directory. Your input: '{save_dir}'\n")
+            all_valid = False
 
         if pretrained_model_var.get():
             model_path = pretrained_model_var.get()
             if not os.path.exists(model_path):
-                messagebox.showerror("Error", f"Please select a valid Pre-trained Model path. Your input: '{model_path}'")
-                return
+                print(f"Error: Please select a valid Pre-trained Model path. Your input: '{model_path}'\n")
+                all_valid = False
         else:
             if yolo_model_var.get() == "Select a model":
-                messagebox.showerror("Error", "Please select one type of model (pre-trained or YOLO)")
-                return
+                print(f"Error: Please select one type of model (pre-trained or YOLO)\n")
+                all_valid = False
             model_path = yolo_model_var.get()
 
         if epochs < 1:
-            messagebox.showerror("Error", f"Please select a Epochs > 0. Your input: {epochs}")
+            print(f"Error: Please select a Epochs > 0. Your input: {epochs}\n")
+            all_valid = False
+        
+        if not all_valid:
             return
 
         start_training_button.config(state=tk.DISABLED)
@@ -125,7 +132,7 @@ def train_main():
         device_var.set("cpu")
 
     root = tk.Tk()
-    root.title("PL Train GUI")
+    root.title("PEON Train GUI")
 
     style = ttk.Style(root)
     style.theme_use("alt")
@@ -303,15 +310,9 @@ def train_main():
 
 def predict_main():
     def browse_img_files():
-        """
-        Browse and select one or more image files.
-        """
         paths = filedialog.askopenfilenames(
             title="Select Image Files",
-            filetypes=[
-                ("Image Files", "*.jpg *.jpeg *.png *.bmp *.tif *.tiff *.webp"),
-                ("All Files", "*.*"),
-            ]
+            filetypes=[("Image Files", "*.jpg *.jpeg *.png *.bmp *.tif *.tiff *.webp")]
         )
         if paths:
             # Convert the tuple/list of paths into a newline-separated string for display
@@ -320,30 +321,21 @@ def predict_main():
             img_files_var.set(selected_files)
 
     def browse_model_path():
-        """
-        Browse to select a model file (e.g. .pt, .pth, .onnx).
-        """
         path = filedialog.askopenfilename(
             title="Select Model File",
-            filetypes=[("Model Files", "*.pt *.pth *.onnx"), ("All Files", "*.*")]
+            filetypes=[("Model Files", "*.pt *.pth *.onnx")]
         )
         if path:
             print(f"Selected Model File: {path}\n")
             model_path_var.set(path)
 
     def browse_save_dir():
-        """
-        Browse for output/save directory.
-        """
         path = filedialog.askdirectory(title="Select Save Directory")
         if path:
             print(f"Selected Save Directory: {path}\n")
             save_dir_var.set(path)
 
     def on_start_prediction():
-        """
-        Validate inputs and start the prediction in a separate thread.
-        """
         answer = messagebox.askyesno(
             "Start Prediction?",
             "Are you sure you want to start the prediction process?"
@@ -359,22 +351,26 @@ def predict_main():
         save_csv = save_csv_var.get()
 
         # Validation checks
+        all_valid = True
         if not raw_img_files:
-            messagebox.showerror("Error", "Please select one or more image files.")
-            return
+            print("Error: Please select one or more image files.\n")
+            all_valid = False
         # Convert newline-separated list of files into a Python list
         img_files_list = [f for f in raw_img_files.splitlines() if f.strip()]
         # Check existence of at least the first file (basic check)
         if not os.path.exists(img_files_list[0]):
-            messagebox.showerror("Error", f"Please select valid image file(s). First invalid: '{img_files_list[0]}'")
-            return
+            print(f"Error: Please select valid image file(s). First invalid: '{img_files_list[0]}'\n")
+            all_valid = False
 
         if not model_path or not os.path.exists(model_path):
-            messagebox.showerror("Error", f"Please select a valid Model path. Your input: '{model_path}'")
-            return
+            print(f"Error: Please select a valid Model path. Your input: '{model_path}'\n")
+            all_valid = False
 
         if not save_dir:
-            messagebox.showerror("Error", f"Please select a valid Save Directory. Your input: '{save_dir}'")
+            print(f"Error: Please select a valid Save Directory. Your input: '{save_dir}'\n")
+            all_valid = False
+
+        if not all_valid:
             return
 
         # Disable the button to prevent multiple concurrent predictions
@@ -406,9 +402,6 @@ def predict_main():
         t.start()
 
     def on_reset():
-        """
-        Reset all fields in the GUI and clear the log.
-        """
         start_predict_button.config(state=tk.NORMAL)
         # Clear the log
         log_text.delete("1.0", tk.END)
@@ -421,7 +414,7 @@ def predict_main():
 
     # ========== Main Window ==========
     root = tk.Tk()
-    root.title("PL Predict GUI")
+    root.title("PEON Predict GUI")
 
     style = ttk.Style(root)
     style.theme_use("alt")  # Or pick any available style on your system
@@ -472,7 +465,7 @@ def predict_main():
     # ========== SAVE DIRECTORY ==========
     ttk.Label(
         main_frame,
-        text="Save Directory",
+        text="Project Save Directory",
         font=("TkDefaultFont", 16)
     ).grid(
         row=4, column=0, columnspan=3, sticky="w", padx=5, pady=(10, 5)
@@ -542,12 +535,8 @@ def predict_main():
     root.mainloop()
 
 def main():
-    """
-    Tkinter-based main window with a menu.
-    From here, you can launch Train or Predict GUIs, or Exit.
-    """
     root = tk.Tk()
-    root.title("Main Menu")
+    root.title("PEON Main Menu")
 
     menubar = tk.Menu(root)
     root.config(menu=menubar)
@@ -558,9 +547,11 @@ def main():
 
     # Commands for each menu item
     def open_train():
+        root.destroy()
         train_main()
 
     def open_predict():
+        root.destroy()
         predict_main()
 
     def on_exit():

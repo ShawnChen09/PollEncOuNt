@@ -33,11 +33,12 @@ def pl_predict(img_files: list[str],
     if save_dir is not None:
         os.makedirs(save_dir, exist_ok=True)
 
+    print("Start Prediction")
     model = ultralytics.YOLO(model_path)
 
     df = pd.DataFrame()
     for file in img_files:
-        print(f'Predicting {file}\n')
+        print(f'\nPredicting Image: {file}')
 
         if save_img or save_csv:
             assert save_dir is not None and os.path.isdir(save_dir), 'save_dir must be a valid directory'
@@ -60,7 +61,7 @@ def pl_predict(img_files: list[str],
     if save_csv:
         save_path = os.path.join(save_dir, "count_result.csv")
         df.to_csv(save_path)
-        print(f'Results saved to: {save_path}\n')
+        print(f'\nCount results saved to: {save_path}\n')
 
     print("Prediction completed.")
     return df
