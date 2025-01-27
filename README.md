@@ -1,4 +1,4 @@
-# PollEncOuNt
+# PollEncOuNt <img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/Peon.png" width="40"/>
 
 The purpose of this project is to count the number of **alive** and **dead** pollens in an image.
 
