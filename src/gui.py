@@ -103,7 +103,7 @@ def train_main():
         sys.stderr = TextRedirector(log_text)
 
         def training_thread():
-            from plc import pl_train
+            from peon import pl_train
             pl_train(
                 data_path=data_path,
                 save_dir=save_dir,
@@ -383,7 +383,7 @@ def predict_main():
         sys.stderr = TextRedirector(log_text)
 
         def prediction_thread():
-            from plc import pl_predict  # Import here so it doesn't block GUI creation
+            from peon import pl_predict  # Import here so it doesn't block GUI creation
 
             pl_predict(
                 img_files=img_files_list,

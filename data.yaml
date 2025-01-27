@@ -1,7 +1,0 @@
-names:
-- alive
-- dead
-nc: 2
-test: ./pollenV2/test/images
-train: ./pollenV2/train/images
-val: ./pollenV2/valid/images
