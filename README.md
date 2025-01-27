@@ -25,7 +25,7 @@ pip install PollEncOuNt
 
 | **Raw**                                      | **Predicted**                              |
 |---------------------------------------------|-------------------------------------------|
-| <img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/pollen_raw.jpg" width="300"/>  | <img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/pollen_predicted.jpg" width="300"/> |
+| <img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/pollen_raw.jpg" width="300"/>  | <img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/pollen_predicted.jpg" width="300"/> |
 
 *blue squares detected are alive, green squares detected ard dead.*
 
@@ -49,7 +49,7 @@ Launch the GUI by typing:
 
 The **PEON Main Menu** will appear.
 
-<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/main_menu.png" width="300"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/main_menu.png" width="300"/>
 
 ### Main Menu
 
@@ -61,7 +61,7 @@ From the Actions menu, you can:
 
 3. **Exit** the application.
 
-<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/menu_action.png" width="300"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/menu_action.png" width="300"/>
 
 ### Train GUI
 
@@ -86,7 +86,7 @@ From the Actions menu, you can:
 4. Reset Training:
  - To reset the form, click the **Reset** button. This clears all input fields and logs.
 
-<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/train_gui.png" width="400"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/train_gui.png" width="400"/>
 
 ### Predict GUI
 1. Open the Predict GUI:
@@ -107,7 +107,7 @@ From the Actions menu, you can:
 4. Reset Prediction:
  - Click the **Reset** button to clear inputs and logs.
 
-<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/predict_gui.png" width="400"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/predict_gui.png" width="400"/>
 
 ## Python API
 
