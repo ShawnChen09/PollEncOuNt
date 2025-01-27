@@ -11,11 +11,11 @@ def _get_result_count(verbose_results):
 
     return results
 
-def pl_predict(img_files: list[str],
-               model_path: str,
-               save_dir: str,
-               save_img: bool = True,
-               save_csv: bool = True,):
+def peon_predict(img_files: list[str],
+                 model_path: str,
+                 save_dir: str,
+                 save_img: bool = True,
+                 save_csv: bool = True,):
     """
     Predicts objects in images using a YOLO model and saves the results to a CSV file.
 

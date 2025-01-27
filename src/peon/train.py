@@ -1,7 +1,11 @@
 import ultralytics
 import os
 
-def pl_train(data_path, save_dir, model_path = "yolov8m.pt", epochs = 100, device = "cpu"):
+def peon_train(data_path,
+               save_dir,
+               model_path = "yolov8m.pt",
+               epochs = 100,
+               device = "cpu",):
     '''
     Trains a YOLO model using the specified parameters.
 
