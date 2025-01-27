@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PollEncOuNt"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Shan-En Chen", email="shawn.for.office@gmail.com" },
 ]
@@ -21,7 +21,7 @@ dynamic = ["dependencies"]
 dependencies = {file = ["requirements.txt"]}
 
 [project.scripts]
-peon = "gui:main"
+peon = "peon_gui.gui:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]  # ["."] by default
