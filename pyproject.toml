@@ -3,20 +3,22 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "plc"
-version = "0.0.1"
+name = "peon"
+version = "1.0.0"
 authors = [
   { name="Shan-En Chen", email="shawn.for.office@gmail.com" },
 ]
-description = "Pollen Detection"
+description = "PollEncOuNt: The purpose of this project is to count the number of alive and dead pollens in an image."
 readme = "README.md"
-requires-python = ">=3.5"
+requires-python = ">=3.12"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 
+[project.scripts]
+peon = "gui:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]  # ["."] by default
