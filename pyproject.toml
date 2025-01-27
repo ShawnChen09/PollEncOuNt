@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=63.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "peon"
-version = "1.0.0"
+name = "PollEncOuNt"
+version = "0.0.1"
 authors = [
   { name="Shan-En Chen", email="shawn.for.office@gmail.com" },
 ]
-description = "PollEncOuNt: The purpose of this project is to count the number of alive and dead pollens in an image."
+description = "The purpose of this project is to count the number of alive and dead pollens in an image."
 readme = "README.md"
 requires-python = ">=3.12"
 classifiers = [
@@ -16,6 +16,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies"]
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
 
 [project.scripts]
 peon = "gui:main"

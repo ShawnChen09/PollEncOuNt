@@ -2,21 +2,30 @@
 
 The purpose of this project is to count the number of **alive** and **dead** pollens in an image.
 
+# Contents
+
+- [Installation](#installation)
+  
+- [Outputs Demonstration](#outputs-demonstration)
+
+- [Usage](#usage)
+
+   - [GUI](#gui)
+
+   - [Python API](#python-api)
+
 # Installation
-1. Required Python Package Installation
+
+1. Local package installs
 ```sh
-pip install -r requirements.txt
-```
-2. Local package installs
-```sh
-pip install -e .
+pip install PollEncOuNt
 ```
 
 # Outputs Demonstration
 
 | **Raw**                                      | **Predicted**                              |
 |---------------------------------------------|-------------------------------------------|
-| <img src="./example/pollen_raw.jpg" width="300"/>  | <img src="./example/pollen_predicted.jpg" width="300"/> |
+| <img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/pollen_raw.jpg" width="300"/>  | <img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/pollen_predicted.jpg" width="300"/> |
 
 *blue squares detected are alive, green squares detected ard dead.*
 
@@ -40,7 +49,7 @@ Launch the GUI by typing:
 
 The **PEON Main Menu** will appear.
 
-<img src="./example/main_menu.png" width="300"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/main_menu.png" width="300"/>
 
 ### Main Menu
 
@@ -52,7 +61,7 @@ From the Actions menu, you can:
 
 3. **Exit** the application.
 
-<img src="./example/menu_action.png" width="300"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/menu_action.png" width="300"/>
 
 ### Train GUI
 
@@ -77,7 +86,7 @@ From the Actions menu, you can:
 4. Reset Training:
  - To reset the form, click the **Reset** button. This clears all input fields and logs.
 
-<img src="./example/train_gui.png" width="400"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/train_gui.png" width="400"/>
 
 ### Predict GUI
 1. Open the Predict GUI:
@@ -98,7 +107,7 @@ From the Actions menu, you can:
 4. Reset Prediction:
  - Click the **Reset** button to clear inputs and logs.
 
-<img src="./example/predict_gui.png" width="400"/>
+<img src="https://github.com/ShawnChen09/PollEncOuNt/blob/main/example/predict_gui.png" width="400"/>
 
 ## Python API
 
