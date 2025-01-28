@@ -3,12 +3,8 @@ import os
 import pandas as pd
 
 def _get_result_count(verbose_results):
-    results = {}
-    verbose_results = list(filter(lambda w: w != "", verbose_results.strip().split()))
-    for key, value in zip(map(lambda k: k.replace(",", ""), verbose_results[1::2]), map(lambda r: int(r), verbose_results[0::2])):
-        key = key[:-1] if value > 1 else key # when more than 1 object detected, a 's' character is added at the end
-        results[key] = int(value)
-
+    verbose_results = list(filter(lambda w: w != "", verbose_results.split(", ")))
+    results = {v.split()[1]: int(v.split()[0]) for v in verbose_results}
     return results
 
 def peon_predict(img_files: list[str],
