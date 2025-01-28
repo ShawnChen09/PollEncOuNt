@@ -63,6 +63,30 @@ From the Actions menu, you can:
 
 <img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/menu_action.png" width="300"/>
 
+### Predict GUI
+
+#### A [Pre-trained Model](https://github.com/ShawnChen09/PollEncOuNt/raw/main/model/best.pt) can directly be used for prediction.
+
+1. Open the Predict GUI:
+ - From the main menu, go to `Actions > Predict`.
+
+2. Configure Prediction Settings:
+ - **Image Files**: Click the **Browse** button and select one or more image files for prediction.
+ - **Model File**: Click the **Browse** button to load the trained model file (`.pt`, `.pth`, or `.onnx`).
+ - **Project Save Directory**: Click the **Browse** button to select the directory where the prediction results will be saved.
+ - **Pridect Settings**:
+   - Check the **Save Images** box to save the images with predictions.
+   - Check the **Save CSV** box to save the results in a `count_result.csv` file.
+
+3. Start Prediction:
+ - Click the **Start Prediction** button to begin inference.
+ - Real-time log updates will appear in the **LOGS** section.
+
+4. Reset Prediction:
+ - Click the **Reset** button to clear inputs and logs.
+
+<img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/predict_gui.png" width="400"/>
+
 ### Train GUI
 
 1. Open the Train GUI:
@@ -70,10 +94,10 @@ From the Actions menu, you can:
  - From the main menu, go to `Actions > Train`.
 
 2. Configure Training Settings:
- - **Data YAML File**: Click the Browse button and select a valid YAML file for training data.
- - **Project Save Directory**: Click the Browse button and choose the directory where training outputs (e.g., logs, model checkpoints) will be saved.
+ - **Data YAML File**: Click the **Browse** button and select a valid YAML file for training data.
+ - **Project Save Directory**: Click the **Browse** button and choose the directory where training outputs (e.g., logs, model checkpoints) will be saved.
  - **Model Selection**:
-   - For Pre-trained Models: Click the Browse button to select a `.pt`, `.pth`, or `.onnx` model file.
+   - For Pre-trained Models: Click the **Browse** button to select a `.pt`, `.pth`, or `.onnx` model file.
    - For YOLOv8 Models: Use the dropdown menu to choose one of the YOLO models (e.g., `yolov8n.pt`).
 - **Training Settings**:
    - Set the number of **epochs** for training.
@@ -88,39 +112,20 @@ From the Actions menu, you can:
 
 <img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/train_gui.png" width="400"/>
 
-### Predict GUI
-1. Open the Predict GUI:
- - From the main menu, go to Actions > Predict.
-
-2. Configure Prediction Settings:
- - **Image Files**: Click the Browse button and select one or more image files for prediction.
- - **Model File**: Click the Browse button to load the trained model file (.pt, .pth, or .onnx).
- - **Project Save Directory**: Click the Browse button to select the directory where the prediction results will be saved.
- - **Options**:
-   - Check the **Save Images** box to save the images with predictions.
-   - Check the **Save CSV** box to save the results in a `count_result.csv` file.
-
-3. Start Prediction:
- - Click the **Start Prediction** button to begin inference.
- - Real-time log updates will appear in the **LOGS** section.
-
-4. Reset Prediction:
- - Click the **Reset** button to clear inputs and logs.
-
-<img src="https://github.com/ShawnChen09/PollEncOuNt/raw/main/example/predict_gui.png" width="400"/>
-
 ## Python API
 
 ### Predict
+
+#### A pre-trained model can directly be used for prediction(path: `./model/best.pt`).
 
 ```python
 from peon import peon_predict
 
 results = peon_predict(img_files=["IMG1", "IMG2", ...],
-                     model_path: "MODEL_PATH",
-                     save_dir: "SAVE_DIR,
-                     save_img = True,
-                     save_csv = True,)
+                       model_path: "MODEL_PATH",
+                       save_dir: "SAVE_DIR,
+                       save_img = True,
+                       save_csv = True,)
 ```
 
 `img_files (list[str])`: List of image path to conduct prediction.
@@ -136,16 +141,14 @@ results = peon_predict(img_files=["IMG1", "IMG2", ...],
 
 ### Train
 
-#### A pre-trained model can directly be used for prediction(path: `./model/best.pt`).
-
 ```python
 from peon import peon_train
 
 peon_train(data_path="DATA_PATH",
-         save_dir="SAVE_DIR",
-         model_path = "yolov8m.pt",
-         epochs = 100,
-         device = "cpu",)
+           save_dir="SAVE_DIR",
+           model_path = "yolov8m.pt",
+           epochs = 100,
+           device = "cpu",)
 ```
 
 `data_path (str)`: Path to the data .YAML file.
