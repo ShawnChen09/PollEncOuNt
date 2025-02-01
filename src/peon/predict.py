@@ -1,6 +1,7 @@
-import ultralytics
 import os
+
 import pandas as pd
+import ultralytics
 
 def _get_result_count(verbose_results):
     verbose_results = list(filter(lambda w: w != "", verbose_results.split(", ")))

@@ -142,11 +142,9 @@ def train_main():
     pretrained_model_var = tk.StringVar(value="")
     yolo_models = [
         "Select a model",
-        "yolov8n.pt",
-        "yolov8s.pt",
-        "yolov8m.pt",
-        "yolov8l.pt",
-        "yolov8x.pt",
+        "yolov8n.pt", "yolov8s.pt", "yolov8m.pt", "yolov8l.pt", "yolov8x.pt",
+        "yolov9t.pt", "yolov9s.pt", "yolov9m.pt", "yolov9c.pt", "yolov9e.pt",
+        "yolo11n.pt", "yolo11s.pt", "yolo11m.pt", "yolo11l.pt", "yolo11x.pt",
     ]
     yolo_model_var = tk.StringVar(value=yolo_models[0])
     epochs_var = tk.StringVar(value="100")
@@ -219,7 +217,7 @@ def train_main():
     yolo_frame = ttk.Frame(model_frame, borderwidth=1, relief="groove", padding=5)
     yolo_frame.grid(row=0, column=1, sticky="nsew", padx=(10, 0))
 
-    ttk.Label(yolo_frame, text="YOLOv8").grid(
+    ttk.Label(yolo_frame, text="YOLO").grid(
         row=0, column=0, sticky="e", padx=5, pady=2
     )
     yolo_model_optionmenu = ttk.OptionMenu(
