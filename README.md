@@ -16,7 +16,7 @@ The purpose of this project is to count the number of **alive** and **dead** pol
 
 # Installation
 
-1. Local package installs
+1. Package installs
 ```sh
 pip install PollEncOuNt
 ```
