@@ -98,9 +98,9 @@ From the Actions menu, you can:
  - **Project Save Directory**: Click the **Browse** button and choose the directory where training outputs (e.g., logs, model checkpoints) will be saved.
  - **Model Selection**:
    - For Pre-trained Models: Click the **Browse** button to select a `.pt`, `.pth`, or `.onnx` model file.
-   - For YOLOv8 Models: Use the dropdown menu to choose one of the YOLO models (e.g., `yolov8n.pt`).
+   - For YOLO Models: Use the dropdown menu to choose one of the YOLO models (e.g., `yolov8n.pt`).
 - **Training Settings**:
-   - Set the number of **epochs** for training.
+   - Set the number of **Epochs** for training.
    - Select the device (`cpu` or `gpu`) from the dropdown menu.
 
 3. Start Training:
