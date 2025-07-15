@@ -5,9 +5,13 @@ import ultralytics
 
 
 def _get_result_count(verbose_results):
-    verbose_results = list(filter(lambda w: w != "", verbose_results.split(", ")))
-    results = {v.split()[1]: int(v.split()[0]) for v in verbose_results}
-    return results
+    try:
+        verbose_results = list(filter(lambda w: w != "", verbose_results.split(", ")))
+        results = {v.split()[1]: int(v.split()[0]) for v in verbose_results}
+        return results
+    except ValueError:
+        print("Detect nothing.")
+        return
 
 
 def peon_predict(
@@ -62,8 +66,11 @@ def peon_predict(
         )
 
         result_count = _get_result_count(res[0].verbose())
-        df_extended = pd.DataFrame(result_count, index=[file])
-        df = pd.concat([df, df_extended], ignore_index=False)
+        if result_count:
+            df_extended = pd.DataFrame(result_count, index=[file])
+            df = pd.concat([df, df_extended], ignore_index=False)
+        else:
+            pass
 
     df = df.fillna(0).astype(int)
     if save_csv:

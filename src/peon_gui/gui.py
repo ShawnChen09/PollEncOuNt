@@ -422,9 +422,7 @@ def predict_main():
         sys.stderr = TextRedirector(log_text)
 
         def prediction_thread():
-            from peon import (
-                peon_predict,  # Import here so it doesn't block GUI creation
-            )
+            from peon import peon_predict
 
             peon_predict(
                 img_files=img_files_list,
@@ -597,7 +595,8 @@ def predict_main():
     control_frame.grid(row=0, column=4, padx=5, pady=5, sticky="w")
     start_predict_button = ttk.Button(
         control_frame, text="Start Prediction", command=on_start_prediction
-    ).pack(side=tk.LEFT)
+    )
+    start_predict_button.pack(side=tk.LEFT)
 
     ttk.Button(control_frame, text="Reset", command=on_reset).pack(side=tk.LEFT)
 
