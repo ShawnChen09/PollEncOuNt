@@ -77,6 +77,8 @@ From the Actions menu, you can:
  - **Pridect Settings**:
    - Check the **Save Images** box to save the images with predictions.
    - Check the **Save CSV** box to save the results in a `count_result.csv` file.
+   - Set the **Confidence** threshold (0-1) to filter detection results. Higher values result in fewer but more confident detections.
+   - Set the **Int./Union (IoU)** threshold (0-1) used for non-maximum suppression. Higher values allow more overlapping bounding boxes (default: 0.5).
 
 3. Start Prediction:
  - Click the **Start Prediction** button to begin inference.
@@ -121,42 +123,75 @@ From the Actions menu, you can:
 ```python
 from peon import peon_predict
 
-results = peon_predict(img_files=["IMG1", "IMG2", ...],
-                       model_path: "MODEL_PATH",
-                       save_dir: "SAVE_DIR,
-                       save_img = True,
-                       save_csv = True,)
+results = peon_predict(
+    img_files=["IMG1", "IMG2", ...],
+    model_path="MODEL_PATH",
+    save_dir="SAVE_DIR",
+    save_img=True,
+    save_csv=True,
+    conf_thres=0.2,
+    iou_thres=0.5,
+)
 ```
 
-`img_files (list[str])`: List of image path to conduct prediction.
+`img_files: list[str]`
 
-`model_path (str)`: Path to the YOLO model.
+- List of image path to conduct prediction.
 
-`save_dir (str, optional)`: Path to the directory to save the results. Required if `save_img` or `save_csv` is `True`.
+`model_path: str`: 
 
-`save_img (bool, optional)`: Whether to save the predicted images. Defaults to `True`.
+- Path to the YOLO model.
 
-`save_csv (bool, optional)`: Whether to save the results to a CSV file. Defaults to `True`.
+`save_dir: str`
 
+- Path to the directory to save the results. Required if `save_img` or `save_csv` is `True`.
+
+`save_img: bool (optional, defaults True)`
+
+- Whether to save the predicted images.
+
+`save_csv: bool (optional, defaults True)`
+
+- Whether to save the results to a CSV file.
+
+`conf_thres: float (optional, defaults 0.2)`
+
+- Confidence threshold for filtering detections. Range 0-1. Higher values result in fewer but more confident detections.
+
+`iou_thres: float (optional, defaults 0.5)`
+
+- Intersection over Union (IoU) threshold for non-maximum suppression. Range 0-1. Higher values allow more overlapping bounding boxes.
 
 ### Train
 
 ```python
 from peon import peon_train
 
-peon_train(data_path="DATA_PATH",
-           save_dir="SAVE_DIR",
-           model_path = "yolov8m.pt",
-           epochs = 100,
-           device = "cpu",)
+peon_train(
+    data_path="DATA_PATH",
+    save_dir="SAVE_DIR",
+    model_path = "yolov8m.pt",
+    epochs=100,
+    device="cpu",
+)
 ```
 
-`data_path (str)`: Path to the data .YAML file.
+`data_path: str`
 
-`save_dir (str)`: Path to the directory to save the trained model.
+- Path to the data .YAML file.
 
-`model_path (str, optional)`: Path to the YOLO model. Defaults to `"yolov8m.pt"`.
+`save_dir: str`
 
-`epochs (int, optional)`: Number of epochs for training. Defaults to `100`.
+- Path to the directory to save the trained model.
 
-`device (str, optional)`: Device to use for training. Defaults to `"cpu"`.
+`model_path: str (optional, defaults "yolov8m.pt")`
+
+- Path to the YOLO model.
+
+`epochs: int (optional, defaults 100)`
+
+- Number of epochs for training.
+
+`device: str (optional, defaults "cpu")`
+
+- Device to use for training.
