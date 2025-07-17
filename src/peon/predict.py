@@ -20,8 +20,11 @@ def peon_predict(
     save_dir: str,
     save_img: bool = True,
     save_csv: bool = True,
-    conf_thres: float = 0.2,
-    iou_thres: float = 0.5,
+    conf: float = 0.0,
+    iou: float = 0.5,
+    imgsz: int | tuple = 1280,
+    max_det: int = 500,
+    **kwargs,
 ):
     """
     Predicts objects in images using a YOLO model and saves the results to a CSV file.
@@ -32,6 +35,11 @@ def peon_predict(
         save_dir (str): Path to the directory to save the results.
         save_img (bool, optional): Whether to save the predicted images. Defaults to True.
         save_csv (bool, optional): Whether to save the results to a CSV file. Defaults to True.
+        conf (float, optional): Confidence threshold for filtering detections. Defaults to 0.0.
+        iou (float, optional): Intersection over Union threshold for NMS. Defaults to 0.5.
+        imgsz (int | tuple, optional): Image size for inference as int or (height, width). Defaults to 1280.
+        max_det (int, optional): Maximum number of detections per image. Defaults to 500.
+        **kwargs: Additional arguments passed directly to the YOLO model's predict method.
 
     Returns:
         pandas.DataFrame: DataFrame containing the results.
@@ -54,15 +62,17 @@ def peon_predict(
 
         res = model.predict(
             source=file,
-            show=False,
-            save=save_img,
-            conf=conf_thres,
-            iou=iou_thres,
-            imgsz=1280,
-            show_labels=False,
+            conf=conf,
+            iou=iou,
+            imgsz=imgsz,
+            max_det=max_det,
             project=save_dir,
             name="image",
+            show=False,
+            save=save_img,
+            show_labels=False,
             exist_ok=True,
+            **kwargs,
         )
 
         result_count = _get_result_count(res[0].verbose())
