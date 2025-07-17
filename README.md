@@ -74,11 +74,14 @@ From the Actions menu, you can:
  - **Image Files**: Click the **Browse** button and select one or more image files for prediction.
  - **Model File**: Click the **Browse** button to load the trained model file (`.pt`, `.pth`, or `.onnx`).
  - **Project Save Directory**: Click the **Browse** button to select the directory where the prediction results will be saved.
- - **Pridect Settings**:
+ - **Parameter Settings**:
    - Check the **Save Images** box to save the images with predictions.
    - Check the **Save CSV** box to save the results in a `count_result.csv` file.
    - Set the **Confidence** threshold (0-1) to filter detection results. Higher values result in fewer but more confident detections.
-   - Set the **Int./Union (IoU)** threshold (0-1) used for non-maximum suppression. Higher values allow more overlapping bounding boxes (default: 0.5).
+   - Set the **Int./Union (IoU)** threshold (0-1) used for non-maximum suppression. Higher values allow more overlapping bounding boxes.
+   - Set the **Image Size** for inference.
+   - Set the **Max Detections** per image.
+   - Add additional YOLO training parameters by clicking the **Add Parameter** button.
 
 3. Start Prediction:
  - Click the **Start Prediction** button to begin inference.
@@ -101,9 +104,9 @@ From the Actions menu, you can:
  - **Model Selection**:
    - For Pre-trained Models: Click the **Browse** button to select a `.pt`, `.pth`, or `.onnx` model file.
    - For YOLO Models: Use the dropdown menu to choose one of the YOLO models (e.g., `yolov8n.pt`).
-- **Training Settings**:
+ - **Parameter Settings**:
    - Set the number of **Epochs** for training.
-   - Select the device (`cpu` or `gpu`) from the dropdown menu.
+   - Add additional YOLO training parameters by clicking the **Add Parameter** button.
 
 3. Start Training:
  - Click the **Start Training** button to begin.
@@ -129,8 +132,11 @@ results = peon_predict(
     save_dir="SAVE_DIR",
     save_img=True,
     save_csv=True,
-    conf_thres=0.2,
-    iou_thres=0.5,
+    conf=0.0,
+    iou=0.5,
+    imgsz=1280,
+    max_det=500,
+    **kwargs
 )
 ```
 
@@ -154,13 +160,25 @@ results = peon_predict(
 
 - Whether to save the results to a CSV file.
 
-`conf_thres: float (optional, defaults 0.2)`
+`conf: float (optional, defaults 0.0)`
 
 - Confidence threshold for filtering detections. Range 0-1. Higher values result in fewer but more confident detections.
 
-`iou_thres: float (optional, defaults 0.5)`
+`iou: float (optional, defaults 0.5)`
 
 - Intersection over Union (IoU) threshold for non-maximum suppression. Range 0-1. Higher values allow more overlapping bounding boxes.
+
+`imgsz: int or tuple (defaults 1280)`
+
+- Image size for inference as integer or (height, width).
+
+`max_det: int (defaults 500)`
+
+- Maximum number of detections allowed per image.
+
+`**kwargs`
+
+-  More YOLO prediction parameters
 
 ### Train
 
@@ -172,7 +190,7 @@ peon_train(
     save_dir="SAVE_DIR",
     model_path = "yolov8m.pt",
     epochs=100,
-    device="cpu",
+    **kwargs
 )
 ```
 
@@ -192,6 +210,6 @@ peon_train(
 
 - Number of epochs for training.
 
-`device: str (optional, defaults "cpu")`
+`**kwargs`
 
-- Device to use for training.
+-  More YOLO training parameters
