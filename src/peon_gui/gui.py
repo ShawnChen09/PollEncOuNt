@@ -57,7 +57,7 @@ def train_main():
         def add_custom_param():
             param_window = tk.Toplevel()
             param_window.title("Add Parameter")
-            param_window.geometry("400x200")
+            param_window.geometry("400x220")
             param_window.resizable(True, True)
             param_window.grab_set()  # Make it modal
 
